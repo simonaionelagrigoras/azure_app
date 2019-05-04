@@ -6,4 +6,4 @@
  * Time: 14:09
  */
 
-echo "Hello world";
+echo "Hello Azure!";
