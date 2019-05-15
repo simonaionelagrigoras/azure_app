@@ -18,7 +18,7 @@ class Users{
             //$pdo = new PDO("mysql:dbname=app;host=localhost", "app_user", "app_us3r_pass");
             //$pdo = new PDO("sqlsrv:Server=localhost;Database=app", "app_user", "app_us3r_pass");
             //$pdo = new PDO("mysql:host=$host;port=3306;dbname=$reImportDB", $user, $pass);
-            $pdo = new PDO("sqlsrv:Server=cc-azure-webapp-mysql.mysql.database.azure.com;Database=app", "app_user@cc-azure-webapp-mysql", "app_us3r_pass");
+            //$pdo = new PDO("sqlsrv:Server=cc-azure-webapp-mysql.mysql.database.azure.com;Database=app", "app_user@cc-azure-webapp-mysql", "app_us3r_pass");
             $serverName = "cc-azure-webapp-mysql.mysql.database.azure.com"; // update me
             $connectionOptions = array(
                 "Database" => "app", // update me
