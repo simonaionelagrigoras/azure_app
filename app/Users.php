@@ -10,10 +10,23 @@ class Users{
 
     protected function connect(){
         $reImportDB = 'app';
+        $host = 'cc-azure-webapp-mysql.mysql.database.azure.com';
         $user = 'app_user';
         $pass = 'app_us3r_pass';
         try {
-            $pdo = new PDO("mysql:dbname={$reImportDB};host=localhost", $user, $pass);
+            //$pdo = new PDO("mysql:dbname={$reImportDB};host=$host", $user, $pass);
+            //$pdo = new PDO("mysql:dbname=app;host=localhost", "app_user", "app_us3r_pass");
+            //$pdo = new PDO("sqlsrv:Server=localhost;Database=app", "app_user", "app_us3r_pass");
+            //$pdo = new PDO("mysql:host=$host;port=3306;dbname=$reImportDB", $user, $pass);
+            $pdo = new PDO("sqlsrv:Server=cc-azure-webapp-mysql.mysql.database.azure.com;Database=app", "app_user@cc-azure-webapp-mysql", "app_us3r_pass");
+            $serverName = "cc-azure-webapp-mysql.mysql.database.azure.com"; // update me
+            $connectionOptions = array(
+                "Database" => "app", // update me
+                "Uid" => "app_user", // update me
+                "PWD" => "app_us3r_pass" // update me
+            );
+            //Establishes the connection
+            $conn = sqlsrv_connect($serverName, $connectionOptions);
         }catch (PDOException $e) {
             throw new Exception("Error!: " . $e->getMessage());
             //die();
