@@ -21,7 +21,6 @@ class Users{
             if (mysqli_connect_errno($conn)) {
                 die('Failed to connect to MySQL: '.mysqli_connect_error());
             }
-
             //$pdo = new PDO("mysql:dbname={$reImportDB};host=$host", $user, $pass);
             //$pdo = new PDO("mysql:dbname=app;host=localhost", "app_user", "app_us3r_pass");
             //$pdo = new PDO("sqlsrv:Server=localhost;Database=app", "app_user", "app_us3r_pass");
@@ -89,14 +88,13 @@ class Users{
         try{
             $conn = $this->connect();
 
-            $sql = "DELETE FROM `users`WHERE id='$userId'";
+            $sql = "DELETE FROM `users` WHERE id='$userId'";
             $conn->query($sql);
             if(count($conn->error_list)){
                 return ['error' => $conn->error_list];
             }else{
                 return ['success' => "User Deleted"];
             }
-
         }catch (Exception $e){
             return ['error' => "Could not delete user" . $e->getMessage()];
         }

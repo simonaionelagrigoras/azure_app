@@ -60,7 +60,6 @@
                 <h3>List Users</h3>
                 <button type="button" id="list-users" class="btn btn-dark"><strong>Submit</strong></button>
                 <hr>
-                <?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . 'var/log/request.log';?>
                 <form id="add-user">
                     <h3>Add user</h3>
                     <table>
@@ -83,7 +82,7 @@
                     <button type="submit" id="create-user" class="btn btn-dark"><strong>Submit</strong></button>
                 </form>
                 <hr>
-                <form id="delete-user">
+                <!--<form id="delete-user">
                     <h3>Delete User</h3>
                     <table>
                         <tr>
@@ -94,6 +93,13 @@
                         </tr>
                     </table>
                     <button type="submit" id="remove-user" class="btn btn-dark"><strong>Submit</strong></button>
+                </form>-->
+
+                <form id="upload">
+                    <h3>File Upload</h3>
+                    <div class="fileUpload btn-primary">
+                        <input name="userFile" id="userFile" multiple="" max="3" type="file" class="upload">
+                    </div>
                 </form>
 
             </div>
@@ -191,6 +197,7 @@
                         result = result + JSON.stringify(value);
                     });
                     alert(result);
+
                 },
                 error: function(response) {
                     var result = '';
@@ -237,6 +244,51 @@
                 }
             });
         });
+
+        jQuery(document).on("change", "#userFile", function(event)
+        {
+            var existing_files = jQuery('.uploaded-values').length;
+
+            var form_data = new FormData();
+
+            form_data.append('file',  $('#userFile')[0].files[0]);
+
+            if(jQuery('#userFile').val()) {
+
+                jQuery.ajax({
+                    url: "app/simpleApi",
+                    dataType: 'json',
+                    cache: false,
+                    /*enctype: 'multipart/form-data',*/
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'POST',
+                    target:   '#targetLayer',
+                    success:function (response){
+                        if(typeof response.error != 'undefined'){
+                            alert(response.error);
+                        }
+                        if(typeof response.success != 'undefined'){
+                            alert(response.success);
+                        }
+                        jQuery('#upload')[0].reset();
+                    },
+                    error:function (response){
+                        if(typeof response.error != 'undefined'){
+                            alert(response.error);
+                        }else{
+                           alert('An error occurred during the file upload. Please try again');
+                        }
+                        jQuery('#upload')[0].reset();
+                    },
+                    resetForm: true
+                });
+                return false;
+            }
+
+        })
+
     })
 </script>
 </body>
