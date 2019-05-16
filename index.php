@@ -237,27 +237,6 @@
                 }
             });
         });
-
-        /*$('body').on('submit','#add-user', function(e){
-            e.preventDefault();
-            $.ajax({
-                url: 'app/request.php',
-                type: 'POST',
-                data: { "function": "addUser"},
-                success: function(response) {
-                    var result = '';
-                    response = jQuery.parseJSON(response);
-
-                    if(typeof response.error != 'undefined'){
-                        alert(response.error);
-                    }
-                    $.each( response, function( key, value ) {
-                        result = result + JSON.stringify(value);
-                    });
-                    $('.list-result').val(result);
-                }
-            });
-        });*/
     })
 </script>
 </body>

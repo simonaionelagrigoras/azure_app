@@ -9,10 +9,12 @@
 class Logger{
 
     public function log($data){
-        $logFile = 'http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log';
-        $handle = fopen($logFile, 'w');
+        $logFile = $_SERVER['DOCUMENT_ROOT']. '\var\log\request.log';
         $formattedLog = $this->formatLog($data);
-        file_put_contents($logFile, $formattedLog, FILE_APPEND | LOCK_EX);
+        if ( file_put_contents($logFile, $formattedLog, FILE_APPEND | LOCK_EX) === FALSE) {
+            // the message print that the file could not be created.
+            print 'The file could not be created.';
+        }
     }
 
     protected function formatLog($data)

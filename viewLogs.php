@@ -16,7 +16,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<?php echo 'http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log';?>
 
 <?php require_once('app/agreggateLogs.php');
 $totalTime = 0;
@@ -64,23 +63,23 @@ $totalTime = 0;
         <div class="row">
             <table id="logs">
                 <thead>
-                    <tr>
-                        <td>Date</td>
-                        <td>Request key <pre class="no-style">Data</pre></td>
-                    </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>Request key <pre class="no-style">Data</pre></td>
+                </tr>
                 </thead>
                 <?php if(count($lines)):?>
-                <?php foreach ($lines as $date => $dataLog):?>
-                    <tr>
+                    <?php foreach ($lines as $date => $dataLog):?>
+                        <tr>
                         <td class="date-log"><strong><?php echo $date?></strong></td>
                         <td class="log-details">
                             <?php foreach ($dataLog as $key => $value):?>
                                 <div class="log-line"><strong><?php echo $key?></strong>
-                                <?php if(is_array($value)):?>
-                                    <pre><?php echo json_encode($value, JSON_PRETTY_PRINT)?></pre>
-                                <?php else:?>
-                                    <pre class="no-style"><?php echo $value?></p></pre>
-                                <?php endif?></div>
+                                    <?php if(is_array($value)):?>
+                                        <pre><?php echo json_encode($value, JSON_PRETTY_PRINT)?></pre>
+                                    <?php else:?>
+                                        <pre class="no-style"><?php echo $value?></p></pre>
+                                    <?php endif?></div>
                                 <?php if ($key == 'time'){
                                     $totalTime = $totalTime + floatval($value);
                                 }
@@ -88,8 +87,8 @@ $totalTime = 0;
                             <?php endforeach;?>
 
                         </td>
-                    </tr><?php //break;?>
-                <?php endforeach;?>
+                        </tr><?php //break;?>
+                    <?php endforeach;?>
                 <?php else:?>
                 <?php endif?>
             </table>
