@@ -16,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
-<?php var_dump($_SERVER); $file = file('http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log'); ?>
+<?php $file = file('http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log'); ?>
 <?php require_once('app/agreggateLogs.php');
 $totalTime = 0;
 ?>
