@@ -7,10 +7,12 @@
  */
 
 class Logger{
-    CONST LOG_FILE = '../var/log/request.log';
+
     public function log($data){
+        $logFile = 'http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log';
+        $handle = fopen($logFile, 'w');
         $formattedLog = $this->formatLog($data);
-        file_put_contents(self::LOG_FILE, $formattedLog, FILE_APPEND | LOCK_EX);
+        file_put_contents($logFile, $formattedLog, FILE_APPEND | LOCK_EX);
     }
 
     protected function formatLog($data)
