@@ -256,7 +256,7 @@
             if(jQuery('#userFile').val()) {
 
                 jQuery.ajax({
-                    url: "app/simpleApi",
+                    url: "app/simpleApi.php",
                     dataType: 'json',
                     cache: false,
                     /*enctype: 'multipart/form-data',*/

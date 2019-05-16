@@ -66,7 +66,7 @@ class Upload{
         curl_close($ch);
 
         if(empty($result) && empty($error)){
-            return ['success' => "The file was successfully uploaded: "  . $this->destinationURL];
+            return ['success' => "The file was successfully uploaded. <a href=' $this->destinationURL ' target='_blank'>Click here to view the image</a>"];
         }
         return ['result' => $result, 'error' => $error];
     }
