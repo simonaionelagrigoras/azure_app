@@ -17,7 +17,7 @@
 
 </head>
 <?php echo 'http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log';?>
-<?php $file = file('http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log'); ?>
+
 <?php require_once('app/agreggateLogs.php');
 $totalTime = 0;
 ?>

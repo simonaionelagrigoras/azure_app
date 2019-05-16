@@ -6,9 +6,12 @@
  * Time: 00:41
  */
 
+ //$file = file('http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log');
+ $file = file('http://ccazurewebapp.azurewebsites.net/var/log/request.log');
+echo $_SERVER['DOCUMENT_ROOT'];
 
-var_dump($file);exit;
 $file = array_reverse($file);
+var_dump($file);exit;
 $lines = [];
 foreach($file as $f){
 
