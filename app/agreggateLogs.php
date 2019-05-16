@@ -6,7 +6,8 @@
  * Time: 00:41
  */
 
-$file = file('http://localhost/cc/homework_1/var/log/request.log');
+
+var_dump($file);exit;
 $file = array_reverse($file);
 $lines = [];
 foreach($file as $f){

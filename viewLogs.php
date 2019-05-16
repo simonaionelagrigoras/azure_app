@@ -16,6 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+<?php var_dump($_SERVER); $file = file('http://' . $_SERVER['SERVER_NAME']  . '/var/log/request.log'); ?>
 <?php require_once('app/agreggateLogs.php');
 $totalTime = 0;
 ?>
@@ -38,8 +39,8 @@ $totalTime = 0;
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="http://localhost/cc/homework_1/">Home</a></li>
-                    <li><a href="http://localhost/cc/homework_1/viewLogs.php">View Logs</a></li>
+                    <li class="active"><a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>">Home</a></li>
+                    <li><a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>viewLogs.php">View Logs</a></li>
                     <li class="dropdown" style="float:right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><span class="carety" id="user-account"></span></a>
@@ -67,6 +68,7 @@ $totalTime = 0;
                         <td>Request key <pre class="no-style">Data</pre></td>
                     </tr>
                 </thead>
+                <?php if(count($lines)):?>
                 <?php foreach ($lines as $date => $dataLog):?>
                     <tr>
                         <td class="date-log"><strong><?php echo $date?></strong></td>
@@ -80,16 +82,15 @@ $totalTime = 0;
                                 <?php endif?></div>
                                 <?php if ($key == 'time'){
                                     $totalTime = $totalTime + floatval($value);
-                                   // var_dump($value);
-                                   // var_dump($totalTime);
                                 }
-
                                 ?>
                             <?php endforeach;?>
 
                         </td>
                     </tr><?php //break;?>
                 <?php endforeach;?>
+                <?php else:?>
+                <?php endif?>
             </table>
 
         </div>

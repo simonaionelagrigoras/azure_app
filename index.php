@@ -60,7 +60,7 @@
                 <h3>List Users</h3>
                 <button type="button" id="list-users" class="btn btn-dark"><strong>Submit</strong></button>
                 <hr>
-
+                <?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . 'var/log/request.log';?>
                 <form id="add-user">
                     <h3>Add user</h3>
                     <table>
