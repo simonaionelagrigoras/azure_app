@@ -148,25 +148,6 @@
 </div>
 <script type="text/javascript">
     jQuery(document).ready(function(){
-        /*$('body').on('click','#list-users', function(){
-            $.ajax({
-                url: 'app/request.php',
-                type: 'GET',
-                data: { "function": "getUsers"},
-                success: function(response) {
-                    var result = '';
-                    response = jQuery.parseJSON(response);
-                    if(typeof response.error != 'undefined'){
-                        alert(response.error);
-                    }
-                    $.each( response, function( key, value ) {
-                        result = result + JSON.stringify(value);
-                    });
-                    $('.list-result').val(result);
-                }
-            });
-        });*/
-
         $('body').on('click','#list-users', function(){
             $.ajax({
                 url: 'app/simpleApi.php',

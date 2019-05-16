@@ -9,46 +9,44 @@
 class Users{
 
     protected function connect(){
-        $reImportDB = 'app';
-        $host = 'cc-azure-webapp-mysql.mysql.database.azure.com';
-        $user = 'app_user';
-        $pass = 'app_us3r_pass';
+        $host     = 'cc-azure-webapp-mysql.mysql.database.azure.com';
+        $username = 'app_user@cc-azure-webapp-mysql';
+        $password = 'app_us3r_pass';
+        $db_name  = 'app';
         try {
+            //Establishes the connection
+            $conn = mysqli_init();
+            mysqli_ssl_set($conn,null,null,"BaltimoreCyberTrustRoot.crt.pem",NULL,NULL);
+            mysqli_real_connect($conn, $host, $username, $password, $db_name, 3306);
+            if (mysqli_connect_errno($conn)) {
+                die('Failed to connect to MySQL: '.mysqli_connect_error());
+            }
+
             //$pdo = new PDO("mysql:dbname={$reImportDB};host=$host", $user, $pass);
             //$pdo = new PDO("mysql:dbname=app;host=localhost", "app_user", "app_us3r_pass");
             //$pdo = new PDO("sqlsrv:Server=localhost;Database=app", "app_user", "app_us3r_pass");
             //$pdo = new PDO("mysql:host=$host;port=3306;dbname=$reImportDB", $user, $pass);
             //$pdo = new PDO("sqlsrv:Server=cc-azure-webapp-mysql.mysql.database.azure.com;Database=app", "app_user@cc-azure-webapp-mysql", "app_us3r_pass");
-            $serverName = "cc-azure-webapp-mysql.mysql.database.azure.com"; // update me
-            $connectionOptions = array(
-                "Database" => "app", // update me
-                "Uid" => "app_user", // update me
-                "PWD" => "app_us3r_pass" // update me
-            );
-            //Establishes the connection
-            $conn = sqlsrv_connect($serverName, $connectionOptions);
+
         }catch (PDOException $e) {
             throw new Exception("Error!: " . $e->getMessage());
-            //die();
         }
-        if (!$pdo) {
+        if (!$conn) {
             throw new Exception("Error in mysql connection");
-            //print "Eroare: Nu a fost posibilă conectarea la MySQL." . PHP_EOL;
-            //print "Valoarea errno: " . mysqli_connect_errno() . PHP_EOL;
-            //print "Valoarea error: " . mysqli_connect_error() . PHP_EOL;
+
         }
-       // print "Succes: Connection to db successful" . PHP_EOL;
-        return $pdo;
+        return $conn;
     }
 
     public function getUsersList(){
         try{
-            $pdo = $this->connect();
-
+            $conn = $this->connect();
+            $result = [];
             $sql = "SELECT * FROM users ORDER BY id DESC";
-            $query = $pdo->prepare($sql);
-            $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $query = mysqli_query($conn, $sql);
+            while($row = mysqli_fetch_assoc($query)){
+                $result[] = $row;
+            }
             return $result;
         }catch (Exception $e){
             return ['error' => "Could get users: " . $e->getMessage()];
