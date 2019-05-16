@@ -34,8 +34,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="http://localhost/cc/homework_1/">Home</a></li>
-                    <li><a href="http://localhost/cc/homework_1/viewLogs.php">View Logs</a></li>
+                    <li class="active"><a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>">Home</a></li>
+                    <li><a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>viewLogs.php">View Logs</a></li>
                     <li class="dropdown" style="float:right">
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
                            <!--aria-expanded="false"><span class="carety" id="user-account"></span></a>-->
