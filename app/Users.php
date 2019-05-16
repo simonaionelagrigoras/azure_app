@@ -67,18 +67,19 @@ class Users{
         }
 
         try{
-            $pdo = $this->connect();
+            $conn = $this->connect();
 
-            $sql = "INSERT INTO users (`name`, `email`, `age`) VALUES (?,?,?)";
-            $stmt= $pdo->prepare($sql);
-            $stmt->execute([$name, $email, $age]);
-            return ['success' => "User created"];
+            $sql = "INSERT INTO `users` (name, email, age) VALUES ('" . $name . "','" . $email . "','" . $age . "')";
+            $conn->query($sql);
+            if(count($conn->error_list)){
+                return ['error' => $conn->error_list];
+            }else{
+                return ['success' => "User created"];
+            }
         }catch (Exception $e){
             return ['error' => "Could not create user: " . $e->getMessage()];
         }
-
     }
-
 
     public function deleteUser($userId){
         if(!strlen($userId)){
@@ -86,12 +87,16 @@ class Users{
         }
 
         try{
-            $pdo = $this->connect();
+            $conn = $this->connect();
 
-            $sql = "DELETE FROM `users`WHERE id=$userId";
-            $query = $pdo->prepare($sql);
-            $query->execute();
-            return ['success' => "User Deleted"];
+            $sql = "DELETE FROM `users`WHERE id='$userId'";
+            $conn->query($sql);
+            if(count($conn->error_list)){
+                return ['error' => $conn->error_list];
+            }else{
+                return ['success' => "User Deleted"];
+            }
+
         }catch (Exception $e){
             return ['error' => "Could not delete user" . $e->getMessage()];
         }
